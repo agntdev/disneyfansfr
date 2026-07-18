@@ -1,0 +1,43 @@
+[
+  {
+    "name": "/alerte with criterion confirms subscription",
+    "steps": [
+      {
+        "send": { "text": "/alerte Lion" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "🔔 Alerte enregistrée pour « Lion » !\n\nTu seras notifié quand un titre correspondant sera disponible."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/alerte without criterion asks for input",
+    "steps": [
+      {
+        "send": { "text": "/alerte" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "🔔 Tape le nom d'un titre ou un critère pour t'abonner aux alertes :"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "alerte menu button asks for criterion",
+    "steps": [
+      {
+        "send": { "callback": "alerte:menu" },
+        "expect": [{ "method": "editMessageText" }]
+      }
+    ]
+  }
+]

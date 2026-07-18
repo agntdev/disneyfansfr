@@ -1,19 +1,19 @@
 [
   {
-    "name": "Recevoir en privé",
+    "name": "receive private callback shows prompt",
     "steps": [
       {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Demander une réponse détaillée en message privé"
-            }
-          }
-        ],
-        "send": {
-          "callback": "receive:private"
-        }
+        "send": { "callback": "receive:private" },
+        "expect": [{ "method": "editMessageText" }]
+      }
+    ]
+  },
+  {
+    "name": "receive title callback sends private message",
+    "steps": [
+      {
+        "send": { "callback": "receive:title:le-roi-lion" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }
