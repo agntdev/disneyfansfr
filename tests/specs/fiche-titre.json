@@ -1,19 +1,43 @@
 [
   {
-    "name": "/fiche",
+    "name": "/fiche with title shows details",
     "steps": [
       {
+        "send": { "text": "/fiche Lion" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Afficher les détails complets d'un titre"
+              "text": "🎬 <b>Le Roi Lion</b>\n<i>The Lion King</i> (1994)\n\n<b>Synopsis :</b>\nSimba, un jeune lionceau, est né pour devenir roi. Mais la jalousie de son oncle Scar plonge la Terre des Lions dans le chaos. Simba devra affronter son passé pour reconquérir son trône.\n\n<b>Casting :</b> Matthew Broderick, James Earl Jones, Jeremy Irons\n<b>Durée :</b> 1h28\n<b>Genre :</b> Animation, Aventure, Drame\n<b>Âge recommandé :</b> 6+\n<b>Langues :</b> Français, Anglais",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/fiche"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/fiche without title asks for input",
+    "steps": [
+      {
+        "send": { "text": "/fiche" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "🔍 Tape le nom du titre dont tu veux la fiche complète :"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "fiche callback shows details",
+    "steps": [
+      {
+        "send": { "callback": "fiche:le-roi-lion" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

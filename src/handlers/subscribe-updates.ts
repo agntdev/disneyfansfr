@@ -1,17 +1,39 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
+import { getTitleById } from "../catalog.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "S'abonner aux mises à jour", data: "subscribe:updates" }) if the toolkit exposes it.
+const composer = new Composer<Ctx>();
 
-const composer = new Composer();
+composer.callbackQuery(/^subscribe:title:(.+)$/, async (ctx) => {
+  await ctx.answerCallbackQuery();
+  const titleId = ctx.match![1];
+  const title = getTitleById(titleId);
+  if (!title) {
+    await ctx.editMessageText("Titre introuvable.", {
+      reply_markup: inlineKeyboard([[inlineButton("⬅️ Retour au menu", "menu:main")]]),
+    });
+    return;
+  }
+
+  await ctx.editMessageText(
+    `🔔 Abonnement confirmé pour <b>${title.titreFr}</b> !\n\n` +
+      "Tu recevras une notification quand il y aura du nouveau sur ce titre.",
+    {
+      reply_markup: inlineKeyboard([
+        [inlineButton("⬅️ Retour à la fiche", `fiche:${titleId}`)],
+      ]),
+      parse_mode: "HTML",
+    },
+  );
+});
 
 composer.callbackQuery("subscribe:updates", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Créer une alerte pour un titre spécifique");
+  await ctx.editMessageText(
+    "🔔 Sélectionne d'abord un titre via 🔍 Rechercher ou 🔥 Top titres, puis appuie sur « S'abonner aux mises à jour ».",
+    { reply_markup: inlineKeyboard([[inlineButton("⬅️ Retour au menu", "menu:main")]]) },
+  );
 });
 
 export default composer;

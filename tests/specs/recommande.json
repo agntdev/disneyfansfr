@@ -1,19 +1,27 @@
 [
   {
-    "name": "/recommande",
+    "name": "/recommande shows recommendations",
     "steps": [
       {
+        "send": { "text": "/recommande" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Obtenir des suggestions basées sur des préférences"
+              "text": "⭐ Voici tes recommandations :\n\n1. <b>Le Roi Lion</b> (1994) — Animation, Aventure, Drame\n   <i>Simba, un jeune lionceau, est né pour devenir roi. Mais la jalousie de son oncle Scar plonge la Terr…</i>\n\n2. <b>La Reine des Neiges</b> (2013) — Animation, Comédie, Fantaisie\n   <i>Elsa, reine d'Arendelle, possède un pouvoir secret : elle crée de la glace et du givre. Lorsque sa m…</i>\n\n3. <b>La Clubhouse de Mickey</b> (2006) — Animation, Comédie, Éducation\n   <i>Mickey et ses amis résolvent des problèmes avec l'aide du Topsy-Turvy et des téléspectateurs. Chaque…</i>",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/recommande"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "recommande menu button shows genre selection",
+    "steps": [
+      {
+        "send": { "callback": "recommande:menu" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

@@ -1,21 +1,28 @@
 import { Composer } from "grammy";
 import type { Ctx } from "../bot.js";
-import { mainMenuKeyboard } from "../toolkit/index.js";
+import {
+  mainMenuKeyboard,
+  registerMainMenuItem,
+  inlineButton,
+  inlineKeyboard,
+} from "../toolkit/index.js";
 
-// The /start handler renders the bot's MAIN MENU — the primary way users operate
-// a button-first bot. A feature adds its own button by calling
-// `registerMainMenuItem(...)` in its own `src/handlers/<slug>.ts`; this handler
-// renders whatever is registered (plus a Help button), so you do NOT edit this
-// file to add a feature. Send ONE message — no placeholder line above the menu.
+registerMainMenuItem({ label: "🔍 Rechercher", data: "recherche:menu", order: 10 });
+registerMainMenuItem({ label: "⭐ Recommander", data: "recommande:menu", order: 20 });
+registerMainMenuItem({ label: "🔥 Top titres", data: "top:show", order: 30 });
+registerMainMenuItem({ label: "🔔 Alertes", data: "alerte:menu", order: 40 });
+
+const WELCOME =
+  "Bienvenue sur DisneyFanBot ! 🏰\n\n" +
+  "Explore le monde Disney : films, séries, recommandations personnalisées et alertes.\n\n" +
+  "Choisis une option ci-dessous 👇";
+
 const composer = new Composer<Ctx>();
-
-const WELCOME = "👋 Welcome! Tap a button below to get started.";
 
 composer.command("start", async (ctx) => {
   await ctx.reply(WELCOME, { reply_markup: mainMenuKeyboard() });
 });
 
-// "Back to menu" — re-render the main menu in place from any sub-view.
 composer.callbackQuery("menu:main", async (ctx) => {
   await ctx.answerCallbackQuery();
   await ctx.editMessageText(WELCOME, { reply_markup: mainMenuKeyboard() });

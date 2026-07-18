@@ -7,7 +7,9 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": {
+              "text": "Bienvenue sur DisneyFanBot ! 🏰\n\nExplore le monde Disney : films, séries, recommandations personnalisées et alertes.\n\nChoisis une option ci-dessous 👇"
+            }
           }
         ]
       }

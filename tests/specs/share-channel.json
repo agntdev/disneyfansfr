@@ -1,19 +1,19 @@
 [
   {
-    "name": "Partager dans le channel",
+    "name": "share channel callback shows share prompt",
     "steps": [
       {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Partager un titre dans le channel public"
-            }
-          }
-        ],
-        "send": {
-          "callback": "share:channel"
-        }
+        "send": { "callback": "share:channel" },
+        "expect": [{ "method": "editMessageText" }]
+      }
+    ]
+  },
+  {
+    "name": "share title callback shows share message",
+    "steps": [
+      {
+        "send": { "callback": "share:title:le-roi-lion" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

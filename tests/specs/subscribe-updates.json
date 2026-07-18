@@ -1,19 +1,19 @@
 [
   {
-    "name": "S'abonner aux mises à jour",
+    "name": "subscribe updates callback shows prompt",
     "steps": [
       {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Créer une alerte pour un titre spécifique"
-            }
-          }
-        ],
-        "send": {
-          "callback": "subscribe:updates"
-        }
+        "send": { "callback": "subscribe:updates" },
+        "expect": [{ "method": "editMessageText" }]
+      }
+    ]
+  },
+  {
+    "name": "subscribe title callback confirms subscription",
+    "steps": [
+      {
+        "send": { "callback": "subscribe:title:le-roi-lion" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

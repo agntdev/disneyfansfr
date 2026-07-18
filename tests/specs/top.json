@@ -1,19 +1,27 @@
 [
   {
-    "name": "/top",
+    "name": "/top shows popular titles",
     "steps": [
       {
+        "send": { "text": "/top" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Voir les titres les plus demandés"
+              "text": "🔥 Les titres les plus populaires :\n\n1. <b>Encanto</b> (2021) — Animation, Comédie, Fantaisie\n   <i>Mirabel Madrigal est la seule membre de sa famille à ne pas avoir reçu de don ma…</i>\n\n2. <b>The Mandalorian</b> (2019) — Science-fiction, Action, Aventure\n   <i>Un chasseur de primes solitaire parcourt les confins de la galaxie, loin de l'au…</i>\n\n3. <b>Les Indestructibles 2</b> (2018) — Animation, Action, Comédie\n   <i>Helen Parr est recrutée pour une mission secrète pendant que Bob s'occupe des en…</i>\n\n4. <b>Raiponce : La Série</b> (2017) — Animation, Comédie, Aventure\n   <i>Raiponce découvre le monde extérieur après des années enfermée dans une tour. Ac…</i>\n\n5. <b>Moana</b> (2016) — Animation, Aventure, Comédie\n   <i>Moana, fille d'un chef polynésien, entreprend une odyssée en mer pour retrouver …</i>",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/top"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "top menu button shows popular titles",
+    "steps": [
+      {
+        "send": { "callback": "top:show" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

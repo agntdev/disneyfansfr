@@ -1,19 +1,42 @@
 [
   {
-    "name": "/recherche",
+    "name": "/recherche with query shows results",
     "steps": [
       {
+        "send": { "text": "/recherche Lion" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Rechercher un film/série par mot-clé"
+              "text": "🔍 Résultats (1) :\n\n1. 🎬 <b>Le Roi Lion</b> (1994)"
             }
           }
-        ],
-        "send": {
-          "text": "/recherche"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/recherche without query asks for input",
+    "steps": [
+      {
+        "send": { "text": "/recherche" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "🔍 Tape le nom d'un film ou d'une série Disney :"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "search menu button asks for input",
+    "steps": [
+      {
+        "send": { "callback": "recherche:menu" },
+        "expect": [{ "method": "editMessageText" }]
       }
     ]
   }

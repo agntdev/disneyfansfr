@@ -2,17 +2,18 @@ import { Composer } from "grammy";
 import type { Ctx } from "../bot.js";
 import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 
-// /help — plain-language explanation for non-technical users. This bot is
-// button-driven: tell the user to tap /start to open the menu rather than listing
-// slash commands. The same text is shown when the user taps the Help button on the
-// main menu (`menu:help`). Enhance the copy for your specific bot; keep it short.
-const composer = new Composer<Ctx>();
-
 const HELP =
-  "ℹ️ Tap /start to open the menu, then pick what you want from the buttons.\n\n" +
-  "Everything in this bot is reachable by tapping — you don't need to remember any commands.";
+  "ℹ️ Comment ça marche ?\n\n" +
+  "Tout se fait en appuyant sur les boutons — pas besoin de retenir des commandes !\n\n" +
+  "• 🔍 Rechercher — Trouve un film ou une série Disney\n" +
+  "• ⭐ Recommander — Des suggestions selon tes goûts\n" +
+  "• 🔥 Top titres — Les plus populaires du moment\n" +
+  "• 🔔 Alertes — Abonne-toi aux nouveautés\n\n" +
+  "Appuie sur /start pour revenir au menu.";
 
-const backToMenu = inlineKeyboard([[inlineButton("⬅️ Back to menu", "menu:main")]]);
+const backToMenu = inlineKeyboard([[inlineButton("⬅️ Retour au menu", "menu:main")]]);
+
+const composer = new Composer<Ctx>();
 
 composer.command("help", async (ctx) => {
   await ctx.reply(HELP);
