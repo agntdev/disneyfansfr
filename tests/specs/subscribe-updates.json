@@ -1,0 +1,20 @@
+[
+  {
+    "name": "S'abonner aux mises à jour",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Créer une alerte pour un titre spécifique"
+            }
+          }
+        ],
+        "send": {
+          "callback": "subscribe:updates"
+        }
+      }
+    ]
+  }
+]
